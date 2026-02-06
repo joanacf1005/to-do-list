@@ -16,6 +16,11 @@ body {
     background-color: var(--azul-principal);
 }
 
+main{
+    display: grid;
+    justify-items: center;
+}
+
 h1 {
   font-family: Quicksand;
   font-weight: 700; 
@@ -26,6 +31,8 @@ h1 {
 h2 {
     font-family: Quicksand;
     color: var(--branco-principal);
+    display: flex;
+    justify-content: flex-start;
 }
 
 header {
@@ -51,6 +58,7 @@ header {
 }
 
 .add-new-task {
+    margin-top: 5%;
     background-color: var(--branco-principal);
     border-radius: 5%;
     border-color: var(--branco-principal);
@@ -58,15 +66,109 @@ header {
     color: var(--azul-secundario);
 }
 
-.active-tasks {
-    padding: 5%;
+.tasks-list {
+    list-style: none; 
+    padding: 0;
 }
 
-.tasks-list{
-    color:var(--branco-principal);
-    padding-left: 10%;
+.tasks-list li {
+    border-radius: 5%; 
+    padding: 2%;
+    margin-bottom: 5%; 
+    background-color: var(--branco-principal);
 }
 
-.completed-tasks {
-    padding: 5%;
+
+.task-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
 }
+
+/* esconde o checkbox real */
+.task-checkbox {
+    display: none;
+}
+
+/* círculo vazio */
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--azul-principal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+/* círculo cheio*/
+.task-checkbox:checked + .custom-checkbox {
+    background-color: var(--azul-principal);
+    border-color: var(--azul-principal);
+}
+
+/* animação de preencher */
+.task-checkbox:checked + .custom-checkbox::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: var(--branco-principal);
+}
+
+.task-checkbox:checked ~ .task-text {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.custom-checkbox::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    transform: scale(0);
+}
+
+.delete-btn {
+    font-family: Quicksand;
+    font-weight: bolder;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--azul-secundario);
+    opacity: 0.2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-btn:hover {
+    color: var(--azul-principal);
+    opacity: 1;
+}
+
+.completed-tasks-list {
+    list-style: none;
+    padding: 0;
+}
+
+.completed-task-item {
+    border-radius: 5%;
+    padding: 2%;
+    margin-bottom: 5%;
+    background-color: var(--branco-principal); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.completed-task-item .task-text {
+    font-family: Quicksand;
+    color: var(--azul-principal);
+}
+
