@@ -7,25 +7,44 @@ function addTask(){
         alert("Máximo 20 letras!");
         input.value = "";
         return;
+    } 
+
+    if(valorInput == ""){
+        alert("Escreva algo!");
+        return;
     }
 
     const listItem = document.createElement("li"); //cria elemento listItem
     listItem.classList.add("task-item"); 
     listItem.innerHTML = valorInput; 
     listItem.innerHTML = `
-        <label class="task-left">
+        <div class="task-left">
             <input type="checkbox" class="task-checkbox">
             <span class="custom-checkbox"></span>
             <span class="task-text">${valorInput}</span>
             <button class="delete-btn">X</button>
-        </label>
+        </div>
     `; //dá o valor do input ao list item e adiciona botões
 
     console.log(valorInput); 
-    console.log(listItem.innerHTML);
+    console.log(listItem.innerHTML); 
 
-    const taskDone = listItem.querySelector('.task-checkbox'); //seleciona a checkbox
-    taskDone.addEventListener('click', moveToCompleted); //adiciona evento de mover 
+    const taskDone = listItem.querySelector('.task-checkbox'); // seleciona a checkbox
+    taskDone.addEventListener('click', function (event) { //adiciona um timeout para deixar que as animações aconteçam antes de mover
+        event.stopPropagation();
+
+        const taskItem = event.target.closest('.task-item');
+
+        if (taskItem) {
+            // dá tempo para a animação acontecer
+            setTimeout(() => {
+                moveToCompleted(event);
+            }, 300);
+        }
+    });
+
+
+
 
     const deleteBtn = listItem.querySelector('.delete-btn'); // seleciona o botão
     deleteBtn.addEventListener('click', deleteTask); // adiciona evento de delete
